@@ -5,7 +5,6 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY']= '09a780d6915386d98f7316e396267836'
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///site.db'
@@ -22,4 +21,10 @@ app.config['MAIL_USERNAME']= '@gmail.com' #Put some mail id & pass
 app.config['MAIL_PASSWORD']= '' #and allow less secure apps in google settings
 mail = Mail(app)
 
-from flaskblog import routes
+from flaskblog.users.routes import users
+from flaskblog.posts.routes import posts
+from flaskblog.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)
